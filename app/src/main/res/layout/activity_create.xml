@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateActivity">
+
+
+    <Button
+        android:id="@+id/createNew"
+        android:layout_width="203dp"
+        android:layout_height="78dp"
+        android:text="Create New Quiz"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createTitle"
+        app:layout_constraintVertical_bias="0.091" />
+
+    <Button
+        android:id="@+id/uploadButton"
+        android:layout_width="203dp"
+        android:layout_height="78dp"
+        android:text="Upload Quiz"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/createNew"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <Button
+        android:id="@+id/downloadButton"
+        android:layout_width="203dp"
+        android:layout_height="78dp"
+        android:text="Qownload Quiz"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/uploadButton"
+        app:layout_constraintVertical_bias="0.164" />
+
+    <TextView
+        android:id="@+id/createTitle"
+        android:layout_width="303dp"
+        android:layout_height="158dp"
+        android:fontFamily="@font/aclonica"
+        android:text="Quiz Creation"
+        android:textColor="#2141DA"
+        android:textSize="60sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.085"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="101dp"
+        android:layout_height="68dp"
+        android:text="Home"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

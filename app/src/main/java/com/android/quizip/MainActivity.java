@@ -11,13 +11,14 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button logoutBtn;
+    Button logoutBtn, createBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         logoutBtn = findViewById(R.id.logout);
+        createBtn = findViewById(R.id.createQuiz);
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,6 +29,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        createBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), CreateActivity.class));
+                finish();
+            }
+        });
     }
 
 }
