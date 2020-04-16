@@ -13,7 +13,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 public class QuizCreationSettings extends AppCompatActivity {
-    Button back, next;
+    Button next;
     EditText rInput, qInput, qName;
     private static String quizName = new String();
     private static int roundsAmount = 0;
@@ -30,33 +30,30 @@ public class QuizCreationSettings extends AppCompatActivity {
         rInput = findViewById(R.id.numberOfRoundsInput);
         qInput = findViewById(R.id.numberOfQuestionsInput);
         qName = findViewById(R.id.quizNameInput);
-        back = findViewById(R.id.backButton2);
-        next = findViewById(R.id.nextButton);
 
-        back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                finish();
-            }
-        });
+        next = findViewById(R.id.nextButton);
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                roundsAmount = Integer.parseInt(rInput.getText().toString().trim());
                 quizName = qName.getText().toString().trim();
-                questionsPerRound = Integer.parseInt(qInput.getText().toString().trim());
 
-                if (roundsAmount <= 0){
+
+                if (TextUtils.isEmpty(rInput.getText().toString().trim())){
                     rInput.setError("Must enter a value > 0");
                     return;
                 }
+                else {
+                    roundsAmount = Integer.parseInt(String.valueOf(rInput.getText()));
+                }
 
-                if (questionsPerRound <= 0){
+                if (TextUtils.isEmpty(qInput.getText().toString().trim())){
                     qInput.setError("Must enter a value > 0");
                     return;
+                }
+                else {
+                    questionsPerRound = Integer.parseInt(String.valueOf(qInput.getText()));
                 }
 
                 if (TextUtils.isEmpty(quizName)){
@@ -64,8 +61,9 @@ public class QuizCreationSettings extends AppCompatActivity {
                     return;
                 }
 
-
-
+                else {
+                    //TODO save quiz name in database as the file name
+                }
 
                 startActivity(new Intent(getApplicationContext(), RoundSelect.class));
 
@@ -78,7 +76,35 @@ public class QuizCreationSettings extends AppCompatActivity {
 
     public static String getQuizName(){
         return quizName;
-
     }
-}
+
+    public static int getRoundsCounter(){
+        return roundCounter;
+    }
+
+    public static int getQuestionCounter(){
+        return questionCounter;
+    }
+
+    public static void incRoundCounter(){
+        roundCounter++;
+    }
+
+    public static void incQuestionCounter(){
+        questionCounter++;
+    }
+
+    public static int nextQuestion() {
+        if (questionCounter < questionsPerRound) {
+            return 0;
+        }
+        if (roundCounter < roundsAmount) {
+            //TODO method for next round
+            return 1;
+        }
+            return 2;
+        }
+    }
+
+
 
