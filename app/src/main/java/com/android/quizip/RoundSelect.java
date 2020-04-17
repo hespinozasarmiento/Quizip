@@ -58,10 +58,10 @@ public class RoundSelect extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), MatchingActivity.class));
                 }
                 else if (typeOfQuestion.equalsIgnoreCase("multiple choice")){
-                    //TODO method for creating multiple choice input page
+                    startActivity(new Intent(getApplicationContext(), multipleChoiceActivity.class));
                 }
                 else if (typeOfQuestion.equalsIgnoreCase("true or false")){
-                    //TODO method for creating tf input page
+                    startActivity(new Intent(getApplicationContext(), TFActivity.class));
                 }
             }
         });
