@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Quizip</string>
+
+    <string-array name="question_types">
+        <item>Matching</item>
+        <item>Multiple Choice</item>
+        <item>True or False</item>
+    </string-array>
+
 </resources>
