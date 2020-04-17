@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MatchingActivity"></activity>
+        <activity android:name=".TFActivity"></activity>
+        <activity android:name=".multipleChoiceActivity" />
+        <activity android:name=".MatchingActivity" />
         <activity android:name=".RoundSelect" />
         <activity android:name=".QuizCreationSettings" />
         <activity android:name=".CreateActivity" />

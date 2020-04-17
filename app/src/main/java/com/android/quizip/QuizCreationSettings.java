@@ -21,6 +21,7 @@ public class QuizCreationSettings extends AppCompatActivity {
     private static int questionsPerRound = 0;
     private static int questionCounter = 0;
     private static String roundType = new String();
+    private static Write quizWriter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +63,7 @@ public class QuizCreationSettings extends AppCompatActivity {
                 }
 
                 else {
-                    //TODO save quiz name in database as the file name
+                    quizWriter = new Write(quizName);
                 }
 
                 startActivity(new Intent(getApplicationContext(), RoundSelect.class));
@@ -92,6 +93,14 @@ public class QuizCreationSettings extends AppCompatActivity {
 
     public static void incQuestionCounter(){
         questionCounter++;
+    }
+
+    public static void resetQuestionCounter(){
+    questionCounter = 0;
+    }
+
+    public static Write getWriter(){
+        return quizWriter;
     }
 
     public static int nextQuestion() {

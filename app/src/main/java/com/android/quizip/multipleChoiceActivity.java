@@ -15,40 +15,35 @@ import android.widget.TextView;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-public class MatchingActivity extends AppCompatActivity {
+public class multipleChoiceActivity extends AppCompatActivity {
 
     TextView nameView, qView;
-    EditText qStatement, setA, setB;
-    Button next, addA, addB;
-    ListView setAList, setBList;
-    ArrayAdapter<String> adapterA, adapterB;
-    ArrayList<String> listItemsA, listItemsB;
+    EditText qStatement, setA;
+    Button next, addA;
+    ListView setAList;
+    ArrayAdapter<String> adapterA;
+    ArrayList<String> listItemsA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_matching);
+        setContentView(R.layout.activity_multiple_choice);
+
 
         //increases the question counter
         QuizCreationSettings.incQuestionCounter();
 
-        qView = findViewById(R.id.questionNumber);
+        qView = findViewById(R.id.questionNumber2);
         listItemsA = new ArrayList<String>();
-        listItemsB = new ArrayList<String>();
-        nameView = findViewById(R.id.categoryName);
-        qStatement = findViewById(R.id.questionStatementField);
-        setA = findViewById(R.id.matchingSet1);
-        setB = findViewById(R.id.matchingSet2);
-        next = findViewById(R.id.nextButton3);
-        addA = findViewById(R.id.addA);
-        addB = findViewById(R.id.addB);
-        setAList = findViewById(R.id.matchingSetAList);
-        setBList = findViewById(R.id.matchingSetBList);
+        nameView = findViewById(R.id.categoryName2);
+        qStatement = findViewById(R.id.questionStatementField2);
+        setA = findViewById(R.id.matchingSet);
+        next = findViewById(R.id.nextButton4);
+        addA = findViewById(R.id.addA2);
+        setAList = findViewById(R.id.matchingSetAList2);
 
         adapterA = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItemsA);
-        adapterB = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, listItemsB);
         setAList.setAdapter(adapterA);
-        setBList.setAdapter(adapterB);
 
         nameView.setText(RoundSelect.getCategoryTitle());
         qView.setText("Question " + QuizCreationSettings.getQuestionCounter());
@@ -65,18 +60,6 @@ public class MatchingActivity extends AppCompatActivity {
             }
         });
 
-        addB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (TextUtils.isEmpty(setB.getText().toString().trim())){
-                    setB.setError("Must enter text.");
-                    return;
-                }
-                adapterB.add(setB.getText().toString().trim());
-                setB.setText(null);
-            }
-        });
-
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,17 +69,11 @@ public class MatchingActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (listItemsA.size() != listItemsB.size()){
-                    next.setError("Set A and B must have the same amount of entries.");
-                    return;
-                }
-
-                //writes matching questions to the json file.
-                QuizCreationSettings.getWriter().writeMatching(qStatement.getText().toString().trim(), listItemsA, listItemsB);
+                //TODO store the question statement in the database along with the  multiple choice answer array set
 
 
                 if (QuizCreationSettings.nextQuestion() ==0){
-                    startActivity(new Intent(getApplicationContext(), MatchingActivity.class));
+                    startActivity(new Intent(getApplicationContext(), multipleChoiceActivity.class));
                     return;
                 }
                 if (QuizCreationSettings.nextQuestion() ==1){
@@ -111,9 +88,11 @@ public class MatchingActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
                 }
 
             }
         });
+
     }
 }
