@@ -1,5 +1,12 @@
 package com.android.quizip;
 
+import android.util.Log;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import org.json.JSONException;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
@@ -17,12 +24,16 @@ public class Write {
     private Map<String, Map<String, String>> matchingMap;
     private Map<String, Map<String, String>> multipleChoiceMap;
     private String fileName;
+    FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
 
     public Write(String fileName) {
         tfMap = new LinkedHashMap<>();
         matchingMap = new LinkedHashMap<>();
         multipleChoiceMap = new LinkedHashMap<>();
         this.fileName = fileName;
+        fAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
     }
 
     public void writeTF(String statement, String answer) {
@@ -42,7 +53,7 @@ public class Write {
 
         answerMap.put(answers.get(0), "C");
 
-        for (int i = 1; i > answers.size(); i++) {
+        for (int i = 1; i < answers.size(); i++) {
             answerMap.put(answers.get(i), "I");
         }
 
@@ -53,14 +64,12 @@ public class Write {
         quiz.put("trueFalse", tfMap);
         quiz.put("matching", matchingMap);
         quiz.put("multipleChoice", multipleChoiceMap);
-
-      //TODO write the json object "quiz" to firestore
-       // PrintWriter pw = new PrintWriter(new File(fileName +".json"));
-        //pw.write(quiz.toJSONString());
-
-       // pw.flush();
-        //pw.close();
+        DocumentReference documentReference = fStore.collection("users").document(fAuth.getCurrentUser().getUid()).collection("quizzes").document(fileName);
+        documentReference.set(quiz).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("TAG", "onSuccess: Quiz is created called " + fileName);
+            }
+        });
     }
-
-
 }
