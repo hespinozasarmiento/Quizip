@@ -60,6 +60,8 @@ public class multipleChoiceActivity extends AppCompatActivity {
             }
         });
 
+
+
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,7 +71,12 @@ public class multipleChoiceActivity extends AppCompatActivity {
                     return;
                 }
 
-                //TODO store the question statement in the database along with the  multiple choice answer array set
+                if (listItemsA.size() > 2){
+                    setA.setError("Must have at least 2 different choices");
+                    return;
+                }
+
+                QuizCreationSettings.getWriter().writeMultipleChoice(qStatement.getText().toString().trim(), listItemsA);
 
 
                 if (QuizCreationSettings.nextQuestion() ==0){
@@ -87,6 +94,7 @@ public class multipleChoiceActivity extends AppCompatActivity {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
+                    //TODO quiz creation completion notification
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
                 }

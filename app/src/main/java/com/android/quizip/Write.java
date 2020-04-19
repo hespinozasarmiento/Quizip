@@ -37,11 +37,15 @@ public class Write {
         matchingMap.put(statement, setMap);
     }
 
-    public void writeMultipleChoice(String question, ArrayList<Map.Entry<String, String>> answers) {
+    public void writeMultipleChoice(String question, ArrayList<String> answers) {
         Map<String, String> answerMap = new LinkedHashMap<>();
-        for (Map.Entry<String, String> answer : answers) {
-            answerMap.put(answer.getKey(), answer.getValue());
+
+        answerMap.put(answers.get(0), "C");
+
+        for (int i = 1; i > answers.size(); i++) {
+            answerMap.put(answers.get(i), "I");
         }
+
         multipleChoiceMap.put(question, answerMap);
     }
 
@@ -50,7 +54,7 @@ public class Write {
         quiz.put("matching", matchingMap);
         quiz.put("multipleChoice", multipleChoiceMap);
 
-      //TODO write the json object to firestore
+      //TODO write the json object "quiz" to firestore
        // PrintWriter pw = new PrintWriter(new File(fileName +".json"));
         //pw.write(quiz.toJSONString());
 

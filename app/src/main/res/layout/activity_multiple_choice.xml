@@ -60,17 +60,18 @@
         app:layout_constraintHorizontal_bias="0.274"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/questionStatementField2"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintVertical_bias="0.11" />
 
     <ListView
         android:id="@+id/matchingSetAList2"
-        android:layout_width="325dp"
-        android:layout_height="364dp"
+        android:layout_width="324dp"
+        android:layout_height="338dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/matchingSet"
-        app:layout_constraintVertical_bias="0.033" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/addA2"
@@ -82,7 +83,7 @@
         app:layout_constraintHorizontal_bias="0.304"
         app:layout_constraintStart_toEndOf="@+id/matchingSet"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.31" />
+        app:layout_constraintVertical_bias="0.364" />
 
     <TextView
         android:id="@+id/questionNumber2"
@@ -97,4 +98,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/categoryName2"
         app:layout_constraintVertical_bias="0.022" />
+
+    <TextView
+        android:id="@+id/mcStatement"
+        android:layout_width="325dp"
+        android:layout_height="36dp"
+        android:fontFamily="@font/aclonica"
+        android:gravity="center"
+        android:text="The first choice inputted should be the correct choice"
+        android:textColor="#DC9825"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionStatementField2"
+        app:layout_constraintVertical_bias="0.025" />
 </androidx.constraintlayout.widget.ConstraintLayout>
