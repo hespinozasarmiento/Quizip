@@ -52,7 +52,6 @@ public class RoundSelect extends AppCompatActivity {
                 }
 
                 typeOfQuestion = qTypeSpinner.getSelectedItem().toString();
-                //TODO save category question type to database
 
                 if (typeOfQuestion.equalsIgnoreCase("matching")){
                     startActivity(new Intent(getApplicationContext(), MatchingActivity.class));

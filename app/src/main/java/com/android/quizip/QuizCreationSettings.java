@@ -108,7 +108,6 @@ public class QuizCreationSettings extends AppCompatActivity {
             return 0;
         }
         if (roundCounter < roundsAmount) {
-            //TODO method for next round
             return 1;
         }
             return 2;

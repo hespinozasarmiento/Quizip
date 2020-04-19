@@ -86,6 +86,12 @@ public class MatchingActivity extends AppCompatActivity {
                     return;
                 }
 
+                if (listItemsA.isEmpty() || listItemsB.isEmpty()){
+                    setA.setError("Must enter at least 1 matching set");
+                    setB.setError("Must enter at least 1 matching set");
+                    return;
+                }
+
                 if (listItemsA.size() != listItemsB.size()){
                     next.setError("Set A and B must have the same amount of entries.");
                     return;
@@ -110,6 +116,7 @@ public class MatchingActivity extends AppCompatActivity {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
+                    //TODO quiz creation completion notification
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }
 

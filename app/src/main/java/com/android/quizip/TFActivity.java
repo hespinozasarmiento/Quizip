@@ -65,6 +65,7 @@ public class TFActivity extends AppCompatActivity {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
+                    //TODO quiz creation completion notification
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }
 
