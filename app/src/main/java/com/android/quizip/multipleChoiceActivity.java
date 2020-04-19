@@ -71,7 +71,7 @@ public class multipleChoiceActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (listItemsA.size() > 2){
+                if (listItemsA.size() < 2){
                     setA.setError("Must have at least 2 different choices");
                     return;
                 }
