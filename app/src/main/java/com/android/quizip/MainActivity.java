@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button logoutBtn, createBtn;
+    Button logoutBtn, createBtn, takeBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         logoutBtn = findViewById(R.id.logout);
         createBtn = findViewById(R.id.createQuiz);
+        takeBtn = findViewById(R.id.takeQuiz);
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,6 +34,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), CreateActivity.class));
+                finish();
+            }
+        });
+
+        takeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), TakeQuizActivity.class));
                 finish();
             }
         });

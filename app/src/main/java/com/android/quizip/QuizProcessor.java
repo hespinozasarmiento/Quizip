@@ -1,9 +1,8 @@
+
 package com.android.quizip;
 
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
@@ -15,10 +14,10 @@ public class QuizProcessor {
     private static final ArrayList<Question> mixed = new ArrayList<>();
     private static int counter = 0;
 
-    public QuizProcessor(String fileName) throws IOException, ParseException {
-       //TODO load the quiz from the users list of quizzes
-        // Object quiz = new JSONParser().parse(new FileReader(fileName));
-        QParser parser = new QParser(quiz);
+
+    public QuizProcessor(String fileName) {
+
+        QParser parser = new QParser(fileName);
         trueFalse = parser.parseTrueFalse();
         matching = parser.parseMatching();
         multipleChoice = parser.parseMultipleChoice();
@@ -82,3 +81,4 @@ public class QuizProcessor {
 
 
 }
+
