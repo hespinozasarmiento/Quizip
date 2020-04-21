@@ -81,12 +81,12 @@ public class multipleChoiceActivity extends AppCompatActivity {
 
                 if (QuizCreationSettings.nextQuestion() ==0){
                     startActivity(new Intent(getApplicationContext(), multipleChoiceActivity.class));
-                    return;
+                    finish();
                 }
                 if (QuizCreationSettings.nextQuestion() ==1){
                     QuizCreationSettings.resetQuestionCounter();
                     startActivity(new Intent(getApplicationContext(), RoundSelect.class));
-                    return;
+                    finish();
                 }
                 if (QuizCreationSettings.nextQuestion() ==2){
                     try {
@@ -96,7 +96,7 @@ public class multipleChoiceActivity extends AppCompatActivity {
                     }
                     //TODO quiz creation completion notification
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
+                    finish();
                 }
 
             }

@@ -61,9 +61,11 @@ public class Write {
     }
 
     public void writeJSON() throws FileNotFoundException {
+        quiz.put("qName", fileName);
         quiz.put("trueFalse", tfMap);
         quiz.put("matching", matchingMap);
         quiz.put("multipleChoice", multipleChoiceMap);
+
         DocumentReference documentReference = fStore.collection("users").document(fAuth.getCurrentUser().getUid()).collection("quizzes").document(fileName);
         documentReference.set(quiz).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
