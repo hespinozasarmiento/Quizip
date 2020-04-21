@@ -67,7 +67,7 @@ public class TFActivity extends AppCompatActivity {
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }
-                    //TODO quiz creation completion notification
+
                     Context context = getApplicationContext();
                     CharSequence text = "Quiz Created!";
                     int duration = Toast.LENGTH_LONG;
@@ -75,6 +75,7 @@ public class TFActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
                 }
 
             }
