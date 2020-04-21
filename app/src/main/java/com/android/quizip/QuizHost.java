@@ -9,11 +9,12 @@ import static androidx.core.content.ContextCompat.startActivity;
 
 public class QuizHost {
     private static Question currentQuestion;
+    private static QuizProcessor quizProcessor;
 
     public static void getNextQuestion(Context context) {
 
-        if (QuizProcessor.mixedHasNext()) {
-            currentQuestion = QuizProcessor.getQuestion();
+        if (quizProcessor.mixedHasNext()) {
+            currentQuestion = quizProcessor.getQuestion();
             if (currentQuestion.getType() == QTypes.TRUE_FALSE) {
                 context.startActivity(new Intent(context.getApplicationContext(), TFTakeQuizActivity.class));
 
@@ -29,5 +30,13 @@ public class QuizHost {
 
     public static Question getCurrentQuestion(){
         return currentQuestion;
+    }
+
+    public static void setQuizProcessor(QuizProcessor newQuizProcessor){
+        quizProcessor = newQuizProcessor;
+    }
+
+    public static QuizProcessor getQuizProcessor(){
+        return quizProcessor;
     }
 }

@@ -26,4 +26,11 @@ public class TrueFalse implements Question {
     public ArrayList<String> getAnswers() {
         return new ArrayList<String>(Arrays.asList(answer));
     }
+
+
+    @Override
+    public String toString(){
+        String formatted = question + ": " + answer;
+        return formatted;
+    }
 }

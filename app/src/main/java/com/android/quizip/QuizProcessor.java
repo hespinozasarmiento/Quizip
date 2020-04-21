@@ -8,27 +8,34 @@ import java.util.Collections;
 import java.util.Map;
 
 public class QuizProcessor {
-    private ArrayList<TrueFalse> trueFalse;
-    private ArrayList<Matching> matching;
-    private ArrayList<MultipleChoice> multipleChoice;
-    private static final ArrayList<Question> mixed = new ArrayList<>();
-    private static int counter = 0;
+    private ArrayList<TrueFalse> trueFalse = new ArrayList<>();
+    private ArrayList<Matching> matching = new ArrayList<>();
+    private ArrayList<MultipleChoice> multipleChoice = new ArrayList<>();
+    private QParser parser;
+    private ArrayList<Question> mixed = new ArrayList<>();
+    private int counter = 0;
 
 
     public QuizProcessor(String fileName) {
 
-        QParser parser = new QParser(fileName);
-        trueFalse = parser.parseTrueFalse();
-        matching = parser.parseMatching();
-        multipleChoice = parser.parseMultipleChoice();
+        parser = new QParser(fileName);
+        parser.parseTrueFalse();
+        parser.parseMatching();
+        parser.parseMultipleChoice();
 
-        mixed.addAll(parser.parseTrueFalse());
-        mixed.addAll(parser.parseMatching());
-        mixed.addAll(parser.parseMultipleChoice());
+        if (!trueFalse.isEmpty()) {
+            mixed.addAll(trueFalse);
+        }
+        if (!matching.isEmpty()) {
+            mixed.addAll(matching);
+        }
+        if (!multipleChoice.isEmpty()) {
+            mixed.addAll(multipleChoice);
+        }
         Collections.shuffle(mixed);
     }
 
-    public static Question getQuestion() {
+    public Question getQuestion() {
         if (!mixed.isEmpty()) {
             Question temp = mixed.get(0);
             mixed.remove(0);
@@ -38,11 +45,26 @@ public class QuizProcessor {
             return null;
     }
 
-    public static void resetCounter() {
+    public void resetCounter() {
         counter = 0;
     }
 
-    public static boolean checkAnswer(String userAnswer, Question question) {
+    public QParser getQParser(){
+        return parser;
+    }
+
+    public void setTrueFalse(ArrayList<TrueFalse> trueFalse){
+        this.trueFalse = trueFalse;
+    }
+    public void setMatching(ArrayList<Matching> matching){
+        this.matching = matching;
+    }
+
+    public void setMultipleChoice(ArrayList<MultipleChoice> multipleChoice){
+        this.multipleChoice = multipleChoice;
+    }
+
+    public boolean checkAnswer(String userAnswer, Question question) {
         QTypes type = question.getType();
 
         if (QTypes.TRUE_FALSE.equals(type)) {
@@ -73,7 +95,7 @@ public class QuizProcessor {
         }
     }
 
-    public static Boolean mixedHasNext() {
+    public Boolean mixedHasNext() {
         if (!mixed.isEmpty()) {
             return true;
         } else return false;

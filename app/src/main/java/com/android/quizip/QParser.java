@@ -13,6 +13,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -30,57 +31,57 @@ public class QParser {
     documentReference = fStore.collection("users").document(fAuth.getCurrentUser().getUid()).collection("quizzes").document(fileName);
     }
 
-    public ArrayList<TrueFalse> parseTrueFalse() {
-        final ArrayList trueFalse = new ArrayList<TrueFalse>();
-        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+    public void parseTrueFalse() {
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-            if (documentSnapshot.exists()){
-                Map<String, String> tempMap = (Map) documentSnapshot.get("trueFalse");
-                for (Map.Entry<String, String> entry : tempMap.entrySet()){
-                    trueFalse.add(new TrueFalse(entry.getKey(), entry.getValue()));
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                Map<String, String> tempMap;
+                ArrayList<TrueFalse> trueFalse = new ArrayList<>();
+                if (task.isSuccessful()){
+                    tempMap = (Map<String, String>) task.getResult().get("trueFalse");
+                    for (Map.Entry<String, String> entry : tempMap.entrySet()) {
+                        trueFalse.add(new TrueFalse(entry.getKey(), entry.getValue()));
+                    }
+                    QuizHost.getQuizProcessor().setTrueFalse(trueFalse);
                 }
             }
-            else {
-            }
-            }
         });
-       return trueFalse;
     }
 
-    public ArrayList<Matching> parseMatching() {
-        final ArrayList<Matching> matching = new ArrayList<>();
-        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-           @Override
-           public void onSuccess(DocumentSnapshot documentSnapshot) {
-               if (documentSnapshot.exists()){
-                   Map<String, Map<String, String>> tempMap = (Map) documentSnapshot.get("matching");
-                   for (Map.Entry<String, Map<String, String>> set : tempMap.entrySet()) {
-                       matching.add(new Matching(set.getKey(), new ArrayList<>(set.getValue().entrySet())));
-                   }
 
+//TODO figure out how to read the sub collection in the document. Currently only returns the top level query
+    public void parseMatching() {
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+           public void onComplete(@NonNull Task <DocumentSnapshot> task) {
+                Map<String, Map<String, String>> tempMap;
+                ArrayList<Matching> matching = new ArrayList<>();
+               if (task.isSuccessful()){
+                    tempMap = (Map<String, Map<String, String>>) task.getResult().get("matching");
+                   for (Map.Entry<String, Map<String, String>> set : tempMap.entrySet()) {
+                       matching.add(new Matching(set.getKey(), set.getValue()));
+                   }
+                   QuizHost.getQuizProcessor().setMatching(matching);
                }
            }
        });
-        return matching;
     }
 
-    public ArrayList<MultipleChoice> parseMultipleChoice() {
-        final ArrayList<MultipleChoice> multipleChoice = new ArrayList<>();
-        documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+    //TODO figure out how to read the sub collection in the document. Currently only returns the top level query
+    public void parseMultipleChoice() {
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (documentSnapshot.exists()){
-                   Map<String, Map<String, String>> tempMap = (Map) documentSnapshot.get("multipleChoice");
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                Map<String, Map<String, String>> tempMap;
+                ArrayList<MultipleChoice> multipleChoice = new ArrayList<>();
+                if (task.isSuccessful()){
+                    tempMap = (Map<String, Map<String, String>>) task.getResult().get("multipleChoice");
                     for (Map.Entry<String, Map<String, String>> set : tempMap.entrySet()) {
-                        multipleChoice.add(
-                                new MultipleChoice(set.getKey(), new ArrayList<>(set.getValue().entrySet())));
+                        multipleChoice.add(new MultipleChoice(set.getKey(), set.getValue()));
                     }
-
+                    QuizHost.getQuizProcessor().setMultipleChoice(multipleChoice);
                 }
             }
         });
-
-        return multipleChoice;
-    }
+}
 }

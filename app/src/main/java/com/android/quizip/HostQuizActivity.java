@@ -30,7 +30,6 @@ import java.util.List;
 public class HostQuizActivity extends AppCompatActivity {
     TextView textView;
     Button hostQuiz;
-    public static QuizProcessor quizProcessor;
     ArrayList<String> listItems;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
@@ -49,13 +48,12 @@ public class HostQuizActivity extends AppCompatActivity {
         hostQuiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                quizProcessor = new QuizProcessor(textView.getText().toString());
+                QuizHost.setQuizProcessor(new QuizProcessor(textView.getText().toString()));
                 startActivity(new Intent(getApplicationContext(), HostSettingsActivity.class));
                 finish();
 
             }
         });
-
 
 
         CollectionReference collectionReference = fStore.collection("users").document(fAuth.getCurrentUser().getUid()).collection("quizzes");

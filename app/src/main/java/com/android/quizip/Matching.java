@@ -5,18 +5,16 @@ import java.util.Map;
 
 public class Matching implements Question {
     private String statement;
-    private ArrayList<String> matchingKey;
-    private ArrayList<String> answers;
+    private ArrayList<String> matchingKey = new ArrayList<String>();
+    private ArrayList<String> answers = new ArrayList<>();
     private ArrayList<String> tempArray, tempArrayTwo;
 
-    public Matching(String statement, ArrayList<Map.Entry<String, String>> questions) {
+    public Matching(String statement, Map<String, String> questions) {
         this.statement = statement;
-        matchingKey = new ArrayList<>();
-        answers = new ArrayList<>();
 
-        for (int i = 0; i < questions.size(); i++) {
-            matchingKey.add(questions.get(i).getKey());
-            answers.add(questions.get(i).getValue());
+        for (Map.Entry<String, String> set : questions.entrySet()) {
+            matchingKey.add(set.getKey());
+            answers.add(set.getValue());
         }
         tempArray = matchingKey;
         tempArrayTwo = matchingKey;
@@ -61,5 +59,16 @@ public class Matching implements Question {
 
     public int getMatchingKeySize() {
         return matchingKey.size();
+    }
+
+    @Override
+    public String toString(){
+        String formatted = statement + ": ";
+
+       statement.concat(matchingKey.get(0) + " ");
+
+       statement.concat(answers.get(0) + " ");
+
+        return formatted;
     }
 }
