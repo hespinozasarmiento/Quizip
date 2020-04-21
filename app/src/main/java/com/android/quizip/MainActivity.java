@@ -11,6 +11,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+
     Button logoutBtn, createBtn, takeBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
