@@ -6,11 +6,14 @@ import java.util.Map;
 
 public class MultipleChoice implements Question {
     private String question;
-    private ArrayList<Map.Entry<String, String>> answers;
+    private ArrayList<Map.Entry<String, String>> answers = new ArrayList<>();
 
-    public MultipleChoice(String question, ArrayList<Map.Entry<String, String>> answers) {
+    public MultipleChoice(String question, Map<String, String> answers) {
         this.question = question;
-        this.answers = answers;
+
+        for (Map.Entry<String, String> set : answers.entrySet()){
+            this.answers.add(set);
+        }
     }
 
     @Override

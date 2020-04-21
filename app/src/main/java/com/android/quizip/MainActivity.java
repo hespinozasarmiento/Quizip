@@ -1,17 +1,34 @@
 package com.android.quizip;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
     Button logoutBtn, createBtn, takeBtn;
+    FirebaseAuth fAuth;
+    FirebaseFirestore fStore;
+    DocumentReference documentReference;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +62,26 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+/*        fStore = FirebaseFirestore.getInstance();
+        fAuth = FirebaseAuth.getInstance();
+        documentReference = fStore.collection("users").document(fAuth.getCurrentUser().getUid()).collection("quizzes").document("test quiz");
+
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                Map<String,String> test;
+                if (task.isSuccessful()){
+                    test = (Map<String, String>) task.getResult().get("trueFalse");
+                    TextView testView = findViewById(R.id.testView);
+                    for (Map.Entry<String, String> set : test.entrySet()) {
+                        TrueFalse temp = new TrueFalse(set.getKey(), set.getValue());
+                        testView.append(temp.toString());
+                    }
+                }
+           }
+        });
+*/
     }
 
 }
