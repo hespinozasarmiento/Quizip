@@ -23,6 +23,8 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
+
     Button logoutBtn, createBtn, takeBtn;
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
