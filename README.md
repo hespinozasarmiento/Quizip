@@ -30,7 +30,7 @@ Running the project:
 12. Select the system image for a particular API then click Next
 13. Change AVD properties then click Finish
     For further assitance on how to create AVD to use the Android Emulator, please refer to this link below:  
-    https://developers.foxitsoftware.com/kb/article/create-an-emulator-for-testing-in-android-studio/
+   https://developer.android.com/studio/run/managing-avds
 14. If all previous steps have been completed Click run
 
 
